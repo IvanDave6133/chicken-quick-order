@@ -102,10 +102,18 @@ const Index = () => {
           </p>
         </div>
 
-        <div style={{ marginTop: "15px", textAlign: "center" }}>
-          <marquee style={{ color: "#cc0000", fontFamily: "Comic Sans MS", fontSize: "16px" }}>
+        <div style={{ marginTop: "15px", textAlign: "center", overflow: "hidden" }}>
+          <div
+            style={{
+              color: "#cc0000",
+              fontFamily: "Comic Sans MS",
+              fontSize: "16px",
+              animation: "scroll-left 10s linear infinite",
+              whiteSpace: "nowrap",
+            }}
+          >
             🔥 HOT DEALS EVERY DAY! 🔥 Visit our MENU page to see all items! 🔥 FREE delivery on orders over $30! 🔥
-          </marquee>
+          </div>
         </div>
       </div>
     </div>
