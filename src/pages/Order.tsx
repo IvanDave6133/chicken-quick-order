@@ -1,109 +1,62 @@
-import { Link } from "react-router-dom";
+import NavBar from "@/components/NavBar";
 import { useCart } from "@/context/CartContext";
 
 const Order = () => {
-  const { cart } = useCart();
+  const { cart, removeFromCart } = useCart();
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div style={{ backgroundColor: "#fff3cd", minHeight: "100vh" }}>
-      <div
-        style={{
-          background: "linear-gradient(to right, #ffcc00, #ff6600)",
-          padding: "15px",
-          textAlign: "center",
-        }}
-      >
-        <h1 style={{ fontFamily: "Impact", color: "white", fontSize: "32px", margin: 0 }}>
-          YOUR ORDER
-        </h1>
-      </div>
+    <div className="min-h-screen bg-background text-foreground">
+      <NavBar />
 
-      <nav
-        style={{
-          backgroundColor: "#cc0000",
-          display: "flex",
-          gap: "15px",
-          padding: "8px 20px",
-          fontSize: "11px",
-          fontFamily: "Arial",
-        }}
-      >
-        <Link to="/" style={{ color: "#ffcccc", textDecoration: "none" }}>Home</Link>
-        <Link to="/menu" style={{ color: "#ffcccc", textDecoration: "none" }}>Menu</Link>
-        <Link to="/order" style={{ color: "#ffcccc", textDecoration: "none" }}>Order</Link>
-        <Link to="/contact" style={{ color: "#ffcccc", textDecoration: "none" }}>Contact</Link>
-      </nav>
+      <section className="max-w-3xl mx-auto px-6 py-12">
+        <h1 className="text-3xl font-bold tracking-tight">Your Cart</h1>
 
-      <div style={{ padding: "20px", fontFamily: "Verdana, sans-serif" }}>
         {cart.length === 0 ? (
-          <p style={{ fontSize: "14px", color: "#666" }}>No items yet. Go to Menu to add items.</p>
+          <p className="mt-6 text-foreground/70">Your cart is empty.</p>
         ) : (
-          <div>
-            {/* No remove/edit option - intentional */}
-            <table
-              style={{
-                width: "100%",
-                borderCollapse: "collapse",
-                fontFamily: "Courier New, monospace",
-                fontSize: "13px",
-              }}
-            >
-              <thead>
-                <tr style={{ backgroundColor: "#ffe0b2" }}>
-                  <th style={{ textAlign: "left", padding: "8px", border: "1px solid #ff8c00" }}>Item</th>
-                  <th style={{ padding: "8px", border: "1px solid #ff8c00" }}>Qty</th>
-                  <th style={{ padding: "8px", border: "1px solid #ff8c00" }}>Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cart.map((item) => (
-                  <tr key={item.id}>
-                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>{item.name}</td>
-                    <td style={{ padding: "8px", border: "1px solid #ddd", textAlign: "center" }}>
-                      {item.quantity}
-                    </td>
-                    <td style={{ padding: "8px", border: "1px solid #ddd", textAlign: "center" }}>
-                      ${(item.price * item.quantity).toFixed(2)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-8 rounded-xl border border-border bg-surface divide-y divide-border">
+            {cart.map((item) => (
+              <div key={item.id} className="flex items-center justify-between p-4">
+                <div>
+                  <p className="font-medium">{item.name}</p>
+                  <p className="text-sm text-foreground/60">Qty {item.quantity}</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+                  {/* Subtle issue: remove control is tiny, ambiguous symbol, no label */}
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    aria-label="remove"
+                    className="text-foreground/40 hover:text-foreground/70 text-sm w-5 h-5 leading-none"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+            ))}
 
-            <p
-              style={{
-                fontFamily: "Georgia, serif",
-                fontSize: "18px",
-                color: "#cc0000",
-                marginTop: "15px",
-                fontWeight: "bold",
-              }}
-            >
-              Total: ${total.toFixed(2)}
-            </p>
+            <div className="flex items-center justify-between p-4">
+              <span className="font-semibold">Total</span>
+              <span className="font-semibold">${total.toFixed(2)}</span>
+            </div>
+          </div>
+        )}
 
-            {/* Intentionally vague button, no confirmation */}
+        {cart.length > 0 && (
+          <div className="mt-6 flex justify-end">
+            {/* Subtle issue: clicking provides no confirmation/feedback */}
             <button
               onClick={() => {
-                // No feedback at all - intentional UX flaw
+                /* no feedback intentionally */
               }}
-              style={{
-                fontSize: "11px",
-                padding: "5px 12px",
-                backgroundColor: "#ccc",
-                border: "1px solid #999",
-                borderRadius: "3px",
-                cursor: "pointer",
-                color: "#666",
-                marginTop: "10px",
-              }}
+              className="px-5 py-2.5 rounded-md bg-brand text-brand-foreground font-medium hover:bg-brand/90"
             >
-              Submit
+              Place Order
             </button>
           </div>
         )}
-      </div>
+      </section>
     </div>
   );
 };
