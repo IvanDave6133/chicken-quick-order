@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster } from "sonner";
 import { CartProvider } from "@/context/CartContext";
 import Index from "./pages/Index";
 import Menu from "./pages/Menu";
@@ -10,7 +9,6 @@ import NotFound from "./pages/NotFound";
 const App = () => (
   <CartProvider>
     <BrowserRouter>
-      <Toaster position="top-center" richColors />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/menu" element={<Menu />} />
