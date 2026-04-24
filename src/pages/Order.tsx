@@ -45,14 +45,15 @@ const Order = () => {
 
         {cart.length > 0 && (
           <div className="mt-6 flex justify-end">
-            {/* Subtle issue: clicking provides no confirmation/feedback */}
+            {/* Subtle issues: vague "Submit" label instead of "Place Order",
+                muted styling, no confirmation/feedback after click */}
             <button
               onClick={() => {
                 /* no feedback intentionally */
               }}
-              className="px-5 py-2.5 rounded-md bg-brand text-brand-foreground font-medium hover:bg-brand/90"
+              className="px-4 py-2 rounded-md bg-surface border border-border text-foreground/80 text-sm hover:bg-background"
             >
-              Place Order
+              Submit
             </button>
           </div>
         )}

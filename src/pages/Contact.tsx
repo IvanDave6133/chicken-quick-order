@@ -41,11 +41,13 @@ const Contact = () => {
             />
           </div>
 
+          {/* Subtle issues: required indicator missing, button is muted/low-emphasis,
+              no success/error message rendered after submission */}
           <button
             type="submit"
-            className="px-5 py-2.5 rounded-md bg-brand text-brand-foreground font-medium hover:bg-brand/90"
+            className="px-4 py-2 rounded-md border border-border bg-surface text-foreground/80 text-sm hover:bg-background"
           >
-            Submit
+            Send
           </button>
         </form>
       </section>
