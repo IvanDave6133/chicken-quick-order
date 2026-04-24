@@ -16,12 +16,12 @@ const Index = () => {
           <p className="mt-4 text-foreground/70 text-lg max-w-md">
             Hand-battered, freshly fried, and ready in minutes. Order from the QuickBite menu and skip the line.
           </p>
-          {/* Subtle issue: CTA is low-emphasis (looks like a secondary link/button) */}
+          {/* Subtle issue: vague short label, low-emphasis styling, no icon affordance */}
           <Link
             to="/menu"
             className="inline-block mt-6 px-4 py-2 text-sm border border-border rounded-md text-foreground/80 hover:bg-surface"
           >
-            Order Now
+            Order
           </Link>
         </div>
         <div>

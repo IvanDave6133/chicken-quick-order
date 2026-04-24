@@ -41,12 +41,13 @@ const Menu = () => {
                 <p className="text-sm text-foreground/70 flex-1">{item.description}</p>
                 <div className="flex items-center justify-between mt-2">
                   <span className="font-medium text-foreground">${item.price.toFixed(2)}</span>
-                  {/* Subtle issue: button is a bit small + low contrast against the surface card */}
+                  {/* Subtle issues: small button, low contrast, vague label "Add", no hover feedback,
+                      no confirmation toast/animation when clicked */}
                   <button
                     onClick={() => addToCart({ id: item.id, name: item.name, price: item.price })}
-                    className="text-xs px-2.5 py-1 rounded-md border border-border bg-background text-foreground/70"
+                    className="text-xs px-2 py-1 rounded border border-border bg-background text-foreground/60"
                   >
-                    Add to Cart
+                    Add
                   </button>
                 </div>
               </div>
